@@ -46,7 +46,7 @@ namespace OngClubeDosAumigos
         }
 
         #region INSERIR ADOTANTE 
-        public void InserirAdotante()
+        public void InserirAanimal()
         {
             //Adotante adotante = new Adotante();
             ConexaoBanco conn = new ConexaoBanco();
