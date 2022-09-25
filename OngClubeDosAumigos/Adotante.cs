@@ -149,6 +149,21 @@ namespace OngClubeDosAumigos
         }
         #endregion
 
-       
+        #region Editar Adotante
+        public void UpdateAdotante()
+        {
+            ConexaoBanco conn = new ConexaoBanco();
+            SqlConnection conexaosql = new SqlConnection(conn.Caminho());
+            //ver se está chamando
+            //Console.WriteLine(conn.Caminho());
+            conexaosql.Open();
+
+            SqlCommand cmd = new SqlCommand();
+
+            //fazer um switch para escolher o dado a partir do cpf
+
+            conexaosql.Close();
+        }
+        #endregion
     }
 }
