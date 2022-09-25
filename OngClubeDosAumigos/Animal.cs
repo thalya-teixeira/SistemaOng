@@ -110,7 +110,7 @@ namespace OngClubeDosAumigos
         }
         #endregion
 
-        #region Editar Adotante
+        #region Editar Animal
         public void UpdateAnimal()
         {
             ConexaoBanco conn = new ConexaoBanco();
