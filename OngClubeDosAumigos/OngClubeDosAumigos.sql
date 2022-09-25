@@ -31,7 +31,7 @@ CREATE TABLE Animal(
 );
 
 CREATE TABLE Controle_Adocao(
-
+pr
 	Num_Chip int identity NOT NULL,
 	CPF varchar(11) NOT NULL,
 	Data_Adocao Date NOT NULL

@@ -33,13 +33,14 @@ namespace OngClubeDosAumigos
             CPF = Console.ReadLine();
             DataAdocao = DateTime.Now;
         }
+
+        //insert
+
         #region Visualizar CadastroAdocao
         public void VisualizarAdotante()
         {
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
-            //ver se está chamando
-            //Console.WriteLine(conn.Caminho());
             conexaosql.Open();
 
             SqlCommand cmd = new SqlCommand();
@@ -62,5 +63,7 @@ namespace OngClubeDosAumigos
 
         }
         #endregion
+
+        //update
     }
 }

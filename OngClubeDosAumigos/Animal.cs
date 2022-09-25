@@ -51,13 +51,10 @@ namespace OngClubeDosAumigos
             //Adotante adotante = new Adotante();
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
-            //ver se está chamando
-            //Console.WriteLine(conn.Caminho());
             conexaosql.Open();
 
             SqlCommand cmd = new SqlCommand();
 
-            //busca ou define o meu comando, no caso inserir
             cmd.CommandText = "INSERT INTO Adotante(Num_Chip, Familia, Raca, Sexo, Nome) VALUES (@Num_Chip, @Familia, @Raca, @Sexo, @Nome);";
 
             cmd.Parameters.Add(new SqlParameter("@Num_Chip", this.Num_Chip));
@@ -71,7 +68,6 @@ namespace OngClubeDosAumigos
             Console.ReadKey();
 
             cmd.Connection = conexaosql;
-            //DANDO ERRO 
             cmd.ExecuteNonQuery();
 
             conexaosql.Close();
@@ -79,12 +75,10 @@ namespace OngClubeDosAumigos
         #endregion
 
         #region Visualizar Animal
-        public void VisualizarAnimal()
+        public void SelectAnimal()
         {
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
-            //ver se está chamando
-            //Console.WriteLine(conn.Caminho());
             conexaosql.Open();
 
             SqlCommand cmd = new SqlCommand();
@@ -115,8 +109,6 @@ namespace OngClubeDosAumigos
         {
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
-            //ver se está chamando
-            //Console.WriteLine(conn.Caminho());
             conexaosql.Open();
 
             SqlCommand cmd = new SqlCommand();
