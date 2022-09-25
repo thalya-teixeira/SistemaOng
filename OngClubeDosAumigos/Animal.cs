@@ -111,7 +111,7 @@ namespace OngClubeDosAumigos
         #endregion
 
         #region Editar Adotante
-        public void UpdateAdotante()
+        public void UpdateAnimal()
         {
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
@@ -121,7 +121,7 @@ namespace OngClubeDosAumigos
 
             SqlCommand cmd = new SqlCommand();
 
-            //fazer um switch para escolher o dado a partir do cpf 
+            //fazer um switch para escolher o dado a partir do num_chip
 
             conexaosql.Close();
         }
