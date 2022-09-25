@@ -82,7 +82,6 @@ namespace OngClubeDosAumigos
         #region INSERIR ADOTANTE 
         public void InserirAdotante()
         {
-            //Adotante adotante = new Adotante();
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
             //ver se está chamando
@@ -106,13 +105,7 @@ namespace OngClubeDosAumigos
             cmd.Parameters.Add(new SqlParameter("@Bairro", this.Bairro));
             cmd.Parameters.Add(new SqlParameter("@Cidade", this.Cidade));
             cmd.Parameters.Add(new SqlParameter("@Estado", this.Estado));
-
-            Console.WriteLine(cmd.CommandText);
-            Console.WriteLine("\n\nAQUI FOI");
-            Console.ReadKey();
-
             
-            //DANDO ERRO 
             cmd.ExecuteNonQuery();
 
             conexaosql.Close();
@@ -122,7 +115,6 @@ namespace OngClubeDosAumigos
         #region Visualizar Adotante
         public void VisualizarAdotante()
         {
-            //Adotante adotante = new Adotante();
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
             //ver se está chamando
@@ -142,13 +134,39 @@ namespace OngClubeDosAumigos
                     Console.WriteLine("{0}", reader.GetString(2));
                     Console.WriteLine("{0}", reader.GetString(3));
                     Console.WriteLine("{0}", reader.GetString(4));
+                    Console.WriteLine("{0}", reader.GetString(5));
+                    Console.WriteLine("{0}", reader.GetString(6));
+                    Console.WriteLine("{0}", reader.GetString(7));
+                    Console.WriteLine("{0}", reader.GetString(8));
+                    Console.WriteLine("{0}", reader.GetString(9));
+                    Console.WriteLine("{0}", reader.GetString(10));
                 }
                 Console.WriteLine("\nPressione qualquer tecla para continuar...");
                 Console.ReadKey();
             }
-            //conexaosql.Close();
+            conexaosql.Close();
 
         }
+        #endregion
+
+        #region Busca os Adotantes
+        public void BuscarAdotante()
+        {
+            ConexaoBanco conn = new ConexaoBanco();
+            SqlConnection conexaosql = new SqlConnection(conn.Caminho());
+            //ver se está chamando
+            //Console.WriteLine(conn.Caminho());
+            conexaosql.Open();
+
+            SqlCommand cmd = new SqlCommand();
+
+            Console.Write("Informe o CPF que deseja buscar: ");
+            CPF = Console.ReadLine();
+            //busca ou define o meu comando, no caso inserir
+            cmd.CommandText = "SELECT CPF, Nome, Sexo, DataNasc, Telefone, Logradouro, Numero, Complemento, Bairro, Cidade, Estado FROM Adotante WHERE cpf = @cpf;";
+            cmd.Connection = conexaosql;
+        }
+
         #endregion
     }
 }

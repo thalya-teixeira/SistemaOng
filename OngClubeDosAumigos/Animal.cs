@@ -77,5 +77,37 @@ namespace OngClubeDosAumigos
             conexaosql.Close();
         }
         #endregion
+
+        #region Visualizar Animal
+        public void VisualizarAnimal()
+        {
+            ConexaoBanco conn = new ConexaoBanco();
+            SqlConnection conexaosql = new SqlConnection(conn.Caminho());
+            //ver se está chamando
+            //Console.WriteLine(conn.Caminho());
+            conexaosql.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT Num_Chip, Familia, Raca, Sexo, Nome FROM Animal";
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Console.WriteLine("{0}", reader.GetInt32(0));
+                    Console.WriteLine("{0}", reader.GetString(1));
+                    Console.WriteLine("{0}", reader.GetString(2));
+                    Console.WriteLine("{0}", reader.GetString(3));
+                    Console.WriteLine("{0}", reader.GetString(4));
+                    
+                }
+                Console.WriteLine("\nPressione qualquer tecla para continuar...");
+                Console.ReadKey();
+            }
+            conexaosql.Close();
+
+        }
+        #endregion
     }
 }
