@@ -149,24 +149,6 @@ namespace OngClubeDosAumigos
         }
         #endregion
 
-        #region Busca os Adotantes
-        public void BuscarAdotante()
-        {
-            ConexaoBanco conn = new ConexaoBanco();
-            SqlConnection conexaosql = new SqlConnection(conn.Caminho());
-            //ver se está chamando
-            //Console.WriteLine(conn.Caminho());
-            conexaosql.Open();
-
-            SqlCommand cmd = new SqlCommand();
-
-            Console.Write("Informe o CPF que deseja buscar: ");
-            CPF = Console.ReadLine();
-            //busca ou define o meu comando, no caso inserir
-            cmd.CommandText = "SELECT CPF, Nome, Sexo, DataNasc, Telefone, Logradouro, Numero, Complemento, Bairro, Cidade, Estado FROM Adotante WHERE cpf = @cpf;";
-            cmd.Connection = conexaosql;
-        }
-
-        #endregion
+       
     }
 }
