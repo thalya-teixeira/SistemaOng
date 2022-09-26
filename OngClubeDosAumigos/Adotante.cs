@@ -500,7 +500,6 @@ namespace OngClubeDosAumigos
         }
         #endregion
 
-
         #region Método Para Validar o CPF 
         private static bool ValidaCPF(string vrCPF)
         {

@@ -6,8 +6,8 @@ CREATE TABLE Adotante(
 
 	CPF varchar(11) NOT NULL,
 	Nome varchar(50) NOT NULL,
-	Sexo Char(1) NOT NULL,
-	DataNasc Date NOT NULL,
+	Sexo varchar(1) NOT NULL,
+	DataNasc DateTime NOT NULL,
 	Telefone varchar(11) NOT NULL,
 	Logradouro varchar(50) NOT NULL,
 	Numero varchar (10) NOT NULL,
@@ -31,17 +31,16 @@ CREATE TABLE Animal(
 );
 
 CREATE TABLE Controle_Adocao(
-pr
-	Num_Chip int identity NOT NULL,
+
+	Num_Chip int NOT NULL,
 	CPF varchar(11) NOT NULL,
-	Data_Adocao Date NOT NULL
+	DataAdocao DateTime NOT NULL
 
 	CONSTRAINT PK_Controle_Adocao PRIMARY KEY (Num_Chip, CPF),
-	CONSTRAINT PK_Num_Chip FOREIGN KEY (Num_Chip) REFERENCES Animal (Num_Chip),
-	CONSTRAINT PK_CPF FOREIGN KEY (CPF) REFERENCES Adotante (CPF)
-
+	CONSTRAINT FK_Num_Chip FOREIGN KEY (Num_Chip) REFERENCES Animal (Num_Chip),
+	CONSTRAINT FK_CPF FOREIGN KEY (CPF) REFERENCES Adotante (CPF)
 );
 
 SELECT * FROM Adotante;
 SELECT * FROM Animal;
-SELECT * FROM Adota;
+SELECT * FROM Controle_Adocao;
