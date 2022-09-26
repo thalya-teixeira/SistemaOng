@@ -12,7 +12,7 @@ namespace OngClubeDosAumigos
         public int Num_Chip { get; set; }
         public string Familia { get; set; }
         public string Raca { get; set; }
-        public char Sexo { get; set; }
+        public string Sexo { get; set; }
         public string Nome { get; set; }
        
         public Animal()
@@ -20,7 +20,7 @@ namespace OngClubeDosAumigos
 
         }
 
-        public Animal(int num_chip, string familia, string raca, char sexo, string nome)
+        public Animal(int num_chip, string familia, string raca, string sexo, string nome)
         {
             this.Num_Chip = num_chip;
             this.Familia = familia;
@@ -33,39 +33,81 @@ namespace OngClubeDosAumigos
         {
             Console.Clear();
             Console.WriteLine(">>> CADASTRO DO ANIMAL <<<");
-            //CHIP NUM
-            Console.Write("Informe a família [cachorro, gato, papagaio...]: ");
-            Familia = Console.ReadLine();
-            Console.Write("Informe a raça: ");
-            Raca = Console.ReadLine();
-            Console.Write("Informe [F] para feminino ou [M] para masculino: ");
-            Sexo = char.Parse(Console.ReadLine());
-            Console.Write("Informe o nome: ");
-            Nome = Console.ReadLine();
+            
+            ConexaoBanco conn = new ConexaoBanco();
+
+            do
+            {
+                Console.Write("Informe a família [cachorro, gato, papagaio...]: ");
+                Familia = Console.ReadLine();
+                if (Familia.Length == 0)
+                {
+                    Console.WriteLine("Campo obrigatório!");
+                }
+                if (Familia.Length > 30)
+                {
+                    Console.WriteLine("Informe um nome de família com menos de 50 caracteres!");
+                }
+            } while (Familia.Length > 30 || Familia.Length == 0);
+
+            do
+            {
+                Console.Write("Informe a raça: ");
+                Raca = Console.ReadLine();
+                if (Raca.Length == 0)
+                {
+                    Console.WriteLine("Raça opcional!");
+                }
+                if (Raca.Length > 30)
+                {
+                    Console.WriteLine("Informe uma raça com menos de 50 caracteres!");
+                }
+            } while (Raca.Length > 30 || Raca.Length == 0);
+
+            do
+            {
+
+                Console.Write("Informe [F] para feminino ou [M] para masculino: ");
+                Sexo = conn.TratamentoDado(Console.ReadLine()).ToUpper();
+                if (Sexo == "0")
+                    return;
+                if (Sexo != "M" && Sexo != "N" && Sexo != "F")
+                {
+                    Console.WriteLine("Digite um opção válida!!!");
+                }
+            } while (Sexo != "M" && Sexo != "N" && Sexo != "F");
+
+            do
+            {
+                Console.Write("Informe o nome: ");
+                Nome = Console.ReadLine();
+                if (Nome.Length == 0)
+                {
+                    Console.WriteLine("Nome opcional!");
+                }
+                if (Nome.Length > 50)
+                {
+                    Console.WriteLine("Informe nome com menos de 50 caracteres!");
+                }
+            } while (Nome.Length > 50 || Nome.Length == 0);
 
         }
 
         #region INSERIR ADOTANTE 
-        public void InserirAanimal()
+        public void InsertAnimal()
         {
-            //Adotante adotante = new Adotante();
             ConexaoBanco conn = new ConexaoBanco();
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
             conexaosql.Open();
 
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO Adotante(Num_Chip, Familia, Raca, Sexo, Nome) VALUES (@Num_Chip, @Familia, @Raca, @Sexo, @Nome);";
+            cmd.CommandText = "INSERT INTO Animal(Familia, Raca, Sexo, Nome) VALUES (@Familia, @Raca, @Sexo, @Nome)";
 
-            cmd.Parameters.Add(new SqlParameter("@Num_Chip", this.Num_Chip));
             cmd.Parameters.Add(new SqlParameter("@Familia", this.Familia));
             cmd.Parameters.Add(new SqlParameter("@Raca", this.Raca));
             cmd.Parameters.Add(new SqlParameter("@Sexo", this.Sexo));
             cmd.Parameters.Add(new SqlParameter("@Nome", this.Nome));
-
-            Console.WriteLine(cmd.CommandText);
-            Console.WriteLine("\n\nAQUI FOI");
-            Console.ReadKey();
 
             cmd.Connection = conexaosql;
             cmd.ExecuteNonQuery();
@@ -83,6 +125,7 @@ namespace OngClubeDosAumigos
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "SELECT Num_Chip, Familia, Raca, Sexo, Nome FROM Animal";
+            cmd.Connection = conexaosql;
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -105,19 +148,100 @@ namespace OngClubeDosAumigos
         #endregion
 
         #region Editar Animal
-        public void UpdateAnimal()
+        public void UpdateAdotante()
         {
+            Console.Clear();
+            Console.Write("Digite o nome que deseja alterar o contato: ");
+            string alt = Console.ReadLine();
             ConexaoBanco conn = new ConexaoBanco();
+
+
+            do
+            {
+                Console.Write("Informe a família [cachorro, gato, papagaio...]: ");
+                Familia = Console.ReadLine();
+                if (Familia.Length == 0)
+                {
+                    Console.WriteLine("Campo obrigatório!");
+                }
+                if (Familia.Length > 30)
+                {
+                    Console.WriteLine("Informe um nome de família com menos de 50 caracteres!");
+                }
+            } while (Familia.Length > 30 || Familia.Length == 0);
+
+            do
+            {
+                Console.Write("Informe a raça: ");
+                Raca = Console.ReadLine();
+                if (Raca.Length == 0)
+                {
+                    Console.WriteLine("Raça opcional!");
+                }
+                if (Raca.Length > 30)
+                {
+                    Console.WriteLine("Informe uma raça com menos de 50 caracteres!");
+                }
+            } while (Raca.Length > 30 || Raca.Length == 0);
+
+            do
+            {
+
+                Console.Write("Informe [F] para feminino ou [M] para masculino: ");
+                Sexo = conn.TratamentoDado(Console.ReadLine()).ToUpper();
+                if (Sexo == "0")
+                    return;
+                if (Sexo != "M" && Sexo != "N" && Sexo != "F")
+                {
+                    Console.WriteLine("Digite um opção válida!!!");
+                }
+            } while (Sexo != "M" && Sexo != "N" && Sexo != "F");
+
+            do
+            {
+                Console.Write("Informe o nome: ");
+                Nome = Console.ReadLine();
+                if (Nome.Length == 0)
+                {
+                    Console.WriteLine("Nome opcional!");
+                }
+                if (Nome.Length > 50)
+                {
+                    Console.WriteLine("Informe nome com menos de 50 caracteres!");
+                }
+            } while (Nome.Length > 50 || Nome.Length == 0);
+
+
             SqlConnection conexaosql = new SqlConnection(conn.Caminho());
             conexaosql.Open();
-
             SqlCommand cmd = new SqlCommand();
 
-            //fazer um switch para escolher o dado a partir do num_chip
+
+            cmd.CommandText = ("UPDATE Adotante SET Familia = @Familia, Raca = @Raca, Sexo = @Sexo, Nome = @Nome WHERE Nome = @Novo;");
+
+            SqlParameter novo = new SqlParameter("@Novo", System.Data.SqlDbType.VarChar, 50);
+            SqlParameter familia = new SqlParameter("@Familia", System.Data.SqlDbType.VarChar, 50);
+            SqlParameter raca = new SqlParameter("@Raca", System.Data.SqlDbType.VarChar, 50);
+            SqlParameter sexo = new SqlParameter("@Sexo", System.Data.SqlDbType.Date);
+            SqlParameter nome = new SqlParameter("@Nome", System.Data.SqlDbType.Char, 1);
+
+            novo.Value = alt;
+            familia.Value = Familia;
+            raca.Value = Raca;
+            sexo.Value = Sexo;
+            nome.Value = Nome;
+
+            cmd.Parameters.Add(novo);
+            cmd.Parameters.Add(familia);
+            cmd.Parameters.Add(raca);
+            cmd.Parameters.Add(sexo);
+            cmd.Parameters.Add(nome);
+
+            cmd.Connection = conexaosql;
+            cmd.ExecuteNonQuery();
 
             conexaosql.Close();
         }
-        #endregion
-
+#endregion
     }
 }
