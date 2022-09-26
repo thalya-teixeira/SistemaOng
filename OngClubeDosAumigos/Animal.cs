@@ -148,7 +148,7 @@ namespace OngClubeDosAumigos
         #endregion
 
         #region Editar Animal
-        public void UpdateAdotante()
+        public void UpdateAnimal()
         {
             Console.Clear();
             Console.Write("Digite o nome que deseja alterar o contato: ");
